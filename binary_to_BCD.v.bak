@@ -1,0 +1,57 @@
+
+module binary_to_BCD(
+	input clk,
+	input [11:0] bit_value,
+	output reg [3:0] ones = 0,
+	output reg [3:0] tens = 0,
+	output reg [3:0] hundreds = 0,
+  output reg [3:0] thousands = 0
+	);
+
+reg [4:0] i = 0;
+reg [27:0] shift_register = 0;
+reg [3:0] temp_ones = 0;
+reg [3:0] temp_tens = 0;
+reg [3:0] temp_hundreds = 0;
+reg [3:0] temp_thousands = 0;
+reg [27:0] OLD_bit_value = 0;
+
+always @(posedge clk) begin
+
+		if (i == 0 & (OLD_bit_value != bit_value)) begin
+			shift_register = 28'd0;
+			OLD_bit_value = bit_value;
+			shift_register [11:0] = bit_value;
+			temp_ones = shift_register [15:12];
+			temp_tens = shift_register [19:16];
+			temp_hundreds = shift_register [23:20];
+      temp_thousands = shift_register [27:24];
+			i = i + 1;
+		end
+		if (i < 13 & i > 0) begin
+			if(temp_ones >= 4'b0101)
+				temp_ones = temp_ones + 4'b0011;
+			if(temp_tens >= 5)
+				temp_tens = temp_tens + 4'b0011;
+			if(temp_hundreds >= 4'b0101)
+				temp_hundreds = temp_hundreds + 4'b0011;
+      if(temp_thousands >= 4'b0101)
+  			temp_thousands = temp_thousands + 4'b0011;
+			shift_register [27:12] = {temp_thousands,temp_hundreds,temp_tens,temp_ones};
+			shift_register = shift_register << 1;
+      temp_ones = shift_register [15:12];
+			temp_tens = shift_register [19:16];
+			temp_hundreds = shift_register [23:20];
+      temp_thousands = shift_register [27:24];
+			i = i + 4'b0001;;
+		end
+		if (i == 4'b1001) begin
+			i = 4'b0000;
+			ones = temp_ones;
+      tens = temp_tens;
+      hundreds = temp_hundreds;
+      hundreds = temp_thousands;
+		end
+
+end
+endmodule

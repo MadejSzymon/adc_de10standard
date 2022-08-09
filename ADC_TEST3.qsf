@@ -1,0 +1,123 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2020  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+# Date created = 16:22:30  December 20, 2020
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		ADC_TEST3_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSXFC6D6F31C6
+set_global_assignment -name TOP_LEVEL_ENTITY top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:22:30  DECEMBER 20, 2020"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AF14 -to board_clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to board_clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ADC_SCLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ADC_DOUT
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ADC_DIN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ADC_CS_N
+set_location_assignment PIN_W24 -to ADC_SCLK
+set_location_assignment PIN_V23 -to ADC_DOUT
+set_location_assignment PIN_W22 -to ADC_DIN
+set_location_assignment PIN_Y21 -to ADC_CS_N
+set_global_assignment -name VERILOG_FILE BCD_2x7.v
+set_global_assignment -name VERILOG_FILE binary_to_BCD.v
+set_global_assignment -name VERILOG_FILE adc/synthesis/submodules/altera_up_avalon_adv_adc.v -library adc
+set_global_assignment -name VERILOG_FILE adc/synthesis/submodules/adc_adc_mega_0.v -library adc
+set_global_assignment -name VERILOG_FILE adc/synthesis/adc.v -library adc
+set_global_assignment -name QIP_FILE adc/synthesis/adc.qip
+set_global_assignment -name QIP_FILE pll.qip
+set_global_assignment -name SIP_FILE pll.sip
+set_global_assignment -name VERILOG_FILE top.v
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to hundreds_seg
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to hundreds_seg[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to hundreds_seg[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to hundreds_seg[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to hundreds_seg[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ones_seg
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ones_seg[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ones_seg[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ones_seg[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ones_seg[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tens_seg
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tens_seg[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tens_seg[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tens_seg[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tens_seg[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to thousands_seg
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to thousands_seg[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to thousands_seg[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to thousands_seg[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to thousands_seg[0]
+set_location_assignment PIN_W17 -to ones_seg[0]
+set_location_assignment PIN_V18 -to ones_seg[1]
+set_location_assignment PIN_AG17 -to ones_seg[2]
+set_location_assignment PIN_AG16 -to ones_seg[3]
+set_location_assignment PIN_AH17 -to ones_seg[4]
+set_location_assignment PIN_AG18 -to ones_seg[5]
+set_location_assignment PIN_AH18 -to ones_seg[6]
+set_location_assignment PIN_AF16 -to tens_seg[0]
+set_location_assignment PIN_V16 -to tens_seg[1]
+set_location_assignment PIN_AE16 -to tens_seg[2]
+set_location_assignment PIN_AD17 -to tens_seg[3]
+set_location_assignment PIN_AE18 -to tens_seg[4]
+set_location_assignment PIN_AE17 -to tens_seg[5]
+set_location_assignment PIN_V17 -to tens_seg[6]
+set_location_assignment PIN_AA21 -to hundreds_seg[0]
+set_location_assignment PIN_AB17 -to hundreds_seg[1]
+set_location_assignment PIN_AA18 -to hundreds_seg[2]
+set_location_assignment PIN_Y17 -to hundreds_seg[3]
+set_location_assignment PIN_Y18 -to hundreds_seg[4]
+set_location_assignment PIN_AF18 -to hundreds_seg[5]
+set_location_assignment PIN_W16 -to hundreds_seg[6]
+set_location_assignment PIN_Y19 -to thousands_seg[0]
+set_location_assignment PIN_W19 -to thousands_seg[1]
+set_location_assignment PIN_AD19 -to thousands_seg[2]
+set_location_assignment PIN_AA20 -to thousands_seg[3]
+set_location_assignment PIN_AC20 -to thousands_seg[4]
+set_location_assignment PIN_AA19 -to thousands_seg[5]
+set_location_assignment PIN_AD20 -to thousands_seg[6]
+set_global_assignment -name VERILOG_FILE output_files/timer.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -1,0 +1,7 @@
+
+module hold_counter(clk,hold_count,hold_enable,hold_synch,release_synch);
+input clk;
+output reg hold_enable;
+output reg [1:0] hold_count;
+
+endmodule 

@@ -1,0 +1,21 @@
+
+module adder_acumulator(clk,hold_enable,average_enable);
+
+input clk;
+input hold_tick;
+input average_tick;
+input [11:0] bit_value;
+
+output reg [11:0] acumul_value;
+
+initial
+	acumul_value = {12{1'b0}};
+
+always @(posedge clk) begin
+	if(average_tick)
+		acumul_value = acumul_value << 2;
+	if(hold_tick && average_tick == 0)
+		acumul_value = acumul_value + bit_value;
+end
+
+endmodule 

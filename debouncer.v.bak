@@ -1,0 +1,55 @@
+
+module debouncer(clk,btn,tick);
+
+input btn;
+input clk;
+
+output reg tick;
+
+reg synch_out;
+reg [1:0] synch_chain;
+reg timer_enable;
+reg [1:0] debouncer_chain;
+reg [19:0] timer;
+
+initial
+begin 
+	synch_out = 1'b0;
+	synch_chain = 2'b11;
+	debouncer_chain = 2'b00;
+	timer = {20{1'b0}};
+	tick = 1'b0;
+	timer_enable = 1'b0;
+end
+	
+always @(posedge clk)
+begin
+	synch_chain <= {synch_chain,btn};
+	if (synch_chain[0] & synch_chain[1])
+		synch_out <= 1'b0;
+	else 
+		synch_out <= 1'b1;
+		
+	debouncer_chain <= {debouncer_chain,synch_out};
+	
+	if(debouncer_chain == 2'b10)
+		timer_enable <= 1'b1;
+	else if (debouncer_chain == 2'b01)
+	begin
+		timer_enable <= 1'b0;
+		timer <= {20{1'b0}};
+	end
+	
+	if(timer_enable)
+		timer <= timer + 1'b1;
+		
+	if (timer == {20{1'b1}})
+	begin
+		tick <= 1'b1;
+		timer <= {20{1'b0}};
+		timer_enable <= 1'b0;
+	end
+	else 
+		tick <= 1'b0;	
+end
+endmodule 
